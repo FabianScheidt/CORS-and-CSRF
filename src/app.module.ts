@@ -3,6 +3,7 @@ import { EchoController } from './echo/echo.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CorsWithXhrController } from './cors-with-xhr/cors-with-xhr.controller';
+import { CookieAuthController } from './cookie-auth/cookie-auth.controller';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { CorsWithXhrController } from './cors-with-xhr/cors-with-xhr.controller'
   ],
   controllers: [
     EchoController,
-    CorsWithXhrController
+    CorsWithXhrController,
+    CookieAuthController
   ],
   providers: [],
 })

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Cookie Auth</title>
+  <script type="text/javascript" src="kitten-utils.js"></script>
+  <script type="text/javascript" src="cookie-auth-utils.js"></script>
+  <script>
+    function saveTextareaKittens(url, withCredentials) {
+      const kittens = document.getElementById('kittens').value;
+      saveKittens(JSON.parse(kittens), url, withCredentials);
+    }
+  </script>
+</head>
+<body>
+<textarea id="kittens" rows="4" cols="50" placeholder="Enter some Kittens"></textarea>
+<p>
+  <button onclick="login('http://localhost:8080/cookie-auth/login')">Login</button>
+  <button onclick="fetchKittens('http://localhost:8080/cookie-auth/kittens', true)">Fetch Kittens</button>
+  <button onclick="saveTextareaKittens('http://localhost:8080/cookie-auth/kittens', true)">Save Kittens</button>
+  <button onclick="logout('http://localhost:8080/cookie-auth/logout')">Logout</button>
+</p>
+<pre></pre>
+</body>
+</html>
