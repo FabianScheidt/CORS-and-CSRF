@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="data:;base64,=">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Determine if this is CORS
+      const img = document.getElementsByTagName('img').item(0);
+      const imgUrl = new URL(img.src);
+      const isCors = imgUrl.origin !== location.origin;
+
+      // Generate output
+      const title = 'This is' + (isCors ? '' : ' not') + ' CORS!';
+      const html = `
+        <h1>${title}</h1>
+        <ul>
+          <li>Origin of the page: ${location.origin}</li>
+          <li>Origin of the image: ${imgUrl.origin}</li>
+        </ul>`;
+      document.title = title;
+      document.body.innerHTML = html + document.body.innerHTML;
+    });
+  </script>
+</head>
+<body>
+<img src="http://localhost:8080/assets/kitten.jpg">
+</body>
+</html>
