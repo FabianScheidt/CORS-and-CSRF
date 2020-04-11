@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>CORS with XMLHttpRequest</title>
+  <script type="text/javascript">
+    /**
+     * Performs a GET request to the provided urls and processes the response as kittens
+     *
+     * @param url
+     */
+    function fetchKittens(url) {
+      const request = new XMLHttpRequest();
+      request.withCredentials = false;
+      request.onreadystatechange = () => {
+        if (request.readyState === XMLHttpRequest.DONE) {
+          processKittens(request.response);
+        }
+      }
+      request.open('GET', url);
+      request.send();
+    }
+
+    /**
+     * Tries to read kitten objects from the provided input and logs them
+     *
+     * @param kittens
+     */
+    function processKittens(kittens) {
+      let result = 'Failed to fetch Kittens :(';
+      if (kittens) {
+        result = JSON.stringify(JSON.parse(kittens), null, 2);
+      }
+      const resultElement = document.getElementsByTagName('pre').item(0);
+      resultElement.innerText = result;
+    }
+  </script>
+</head>
+<body>
+<p>
+  <button onclick="fetchKittens('http://localhost:8080/cors-with-xhr/no-header')">Fetch Kittens from API without extra Header</button>
+  <button onclick="fetchKittens('http://localhost:8080/cors-with-xhr/cors-header')">Fetch Kittens from API with CORS Header</button>
+</p>
+<pre></pre>
+</body>
+</html>
