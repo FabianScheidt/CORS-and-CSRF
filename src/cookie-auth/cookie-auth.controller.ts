@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Put, Body, Request, Response } from '@nestjs/common';
+import { Controller, Get, Post, Request, Response } from '@nestjs/common';
+import { readBody } from '../utils/read-body';
 
 @Controller('cookie-auth')
 export class CookieAuthController {
@@ -8,8 +9,10 @@ export class CookieAuthController {
   private kittens: any[] = [];
 
   @Post('login')
-  public login(@Body() body, @Response() response): void {
-    if (body && body.username === this.username && body.password === this.password) {
+  public async login(@Request() request, @Response() response) {
+    const body = await readBody(request);
+    const credentials = JSON.parse(body);
+    if (credentials.username === this.username && credentials.password === this.password) {
       const setCookie = 'sessionSecret=' + this.sessionSecret + '; Max-Age=300';
       const headers = { 'Set-Cookie': setCookie };
       response.writeHead(200, headers).send();
@@ -19,7 +22,7 @@ export class CookieAuthController {
   }
 
   @Get('kittens')
-  public getKittens(@Request() request, @Response() response): void {
+  public getKittens(@Request() request, @Response() response) {
     if (request.cookies.sessionSecret === this.sessionSecret) {
       response.json(this.kittens);
     } else {
@@ -27,10 +30,11 @@ export class CookieAuthController {
     }
   }
 
-  @Put('kittens')
-  public setKittens(@Request() request, @Body() body, @Response() response): void {
+  @Post('kittens')
+  public async setKittens(@Request() request, @Response() response) {
     if (request.cookies.sessionSecret === this.sessionSecret) {
-      this.kittens = body;
+      const body = await readBody(request);
+      this.kittens = JSON.parse(body);
       response.json(this.kittens);
     } else {
       response.status(401).send();
@@ -38,7 +42,7 @@ export class CookieAuthController {
   }
 
   @Post('logout')
-  public logout(@Request() request, @Response() response): void  {
+  public logout(@Request() request, @Response() response)  {
     if (request.cookies.sessionSecret === this.sessionSecret) {
       const setCookie = 'sessionSecret=' + this.sessionSecret + '; Expires=Thu, 01 Jan 1970 00:00:00 GMT';
       const headers = { 'Set-Cookie': setCookie };

@@ -17,7 +17,7 @@ function fetchKittens(url, withCredentials) {
 }
 
 /**
- * Performs a PUT request to the provided url to store an array of kittens.
+ * Performs a POST request to the provided url to store an array of kittens.
  * Processes the response as kittens.
  *
  * @param kittens
@@ -32,8 +32,7 @@ function saveKittens(kittens, url, withCredentials) {
       processKittens(request.response);
     }
   }
-  request.open('PUT', url);
-  request.setRequestHeader('Content-Type', 'application/json');
+  request.open('POST', url);
   request.send(JSON.stringify(kittens));
 }
 

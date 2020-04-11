@@ -1,18 +1,19 @@
 import { Controller, Get, Post, Request, Response } from '@nestjs/common';
+import { readBody } from '../utils/read-body';
 
 @Controller('echo')
 export class EchoController {
 
   @Get()
+  public noEcho(@Response() response) {
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.end('Hello !');
+  }
+
   @Post()
-  public respondEcho(@Request() req, @Response() res) {
-    let bodyChunks = [];
-    req.on('data', (chunk) => {
-      bodyChunks.push(chunk);
-    }).on('end', () => {
-      const body = Buffer.concat(bodyChunks).toString();
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end('Hello ' + body + '!');
-    });
+  public async respondEcho(@Request() request, @Response() response) {
+    const body = await readBody(request);
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.end('Hello ' + body + '!');
   }
 }
