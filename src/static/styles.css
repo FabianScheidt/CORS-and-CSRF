@@ -1,0 +1,70 @@
+@import "/fonts/tilde.css";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: "Tilde Black", Arial, sans-serif;
+}
+
+h1, h2, h3, p {
+  margin: 0.5em 0;
+}
+
+header, .content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+header img {
+  display: block;
+  margin: 20px auto;
+  width: 30px;
+  height: 30px;
+}
+
+header h1 {
+  margin: 40px 0 0 0;
+}
+
+header h2 {
+  margin: 0 0 40px 0;
+  font-size: 1em;
+  font-family: "Tilde", Arial, sans-serif;
+  font-weight: normal;
+}
+
+section {
+  margin: 30px 0;
+}
+
+a.button {
+  display: inline-block;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Tilde", Arial, sans-serif;
+  text-decoration: none;
+  padding: 5px 20px;
+  border-radius: 15px;
+}
+
+a.button:hover {
+  opacity: 0.85;
+}
+
+a.button:active {
+  opacity: 0.7;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  background: linear-gradient(90deg, rgba(0,153,147,1) 0%, rgba(2,135,152,1) 25%, rgba(0,109,156,1) 50%, rgba(16,79,148,1) 100%);
+}

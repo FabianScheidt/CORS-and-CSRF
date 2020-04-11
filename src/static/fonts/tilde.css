@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Umlaut Tilde';
+    font-display: swap;
+    src: url(/fonts/Umlaut_Tilde-Black.woff2) format('woff2'),
+    url(/fonts/Umlaut_Tilde-Black.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Tilde Black';
+    font-display: swap;
+    src: url(/fonts/Tilde-Black.woff2) format('woff2'),
+    url(/fonts/Tilde-Black.woff) format('woff');
+    font-weight: bolder;
+}
+
+@font-face {
+    font-family: 'Tilde';
+    font-display: swap;
+    src: url(/fonts/Tilde-Bold.woff2) format('woff2'),
+    url(/fonts/Tilde-Bold.woff) format('woff');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Tilde';
+    font-display: swap;
+    font-weight: lighter;
+    src: url(/fonts/Tilde-Light.woff2) format('woff2'),
+    url(/fonts/Tilde-Light.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Tilde';
+    font-display: swap;
+    font-weight: normal;
+    src: url(/fonts/Tilde-Regular.woff2) format('woff2'),
+    url(/fonts/Tilde-Regular.woff) format('woff');
+}
+
