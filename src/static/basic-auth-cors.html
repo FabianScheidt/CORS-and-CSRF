@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Bearer Auth</title>
+  <script type="text/javascript" src="kitten-utils.js"></script>
+  <script type="text/javascript" src="auth-utils.js"></script>
+  <script>
+    // Change the page heading depending on the origin
+    document.addEventListener('DOMContentLoaded', () => {
+      const h1 = document.getElementsByTagName('h1').item(0);
+      h1.innerText = location.origin === 'http://alice.localhost:8080' ? 'Kitten Manager' : 'Bob\'s Cross-Kitten Manager';
+    });
+
+    // Intercept XHR to add the Authorization header
+    const openXMLHttpRequest = window.XMLHttpRequest.prototype.open;
+    window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+      const res = openXMLHttpRequest.apply(this, arguments);
+      const authorization = btoa('admin:admin');
+      this.setRequestHeader('Authorization', 'Basic ' + authorization);
+      return res;
+    }
+  </script>
+</head>
+<body>
+<h1></h1>
+<textarea id="kittens" rows="4" cols="50" placeholder="Enter some Kittens"></textarea>
+<p>
+  <button onclick="fetchKittens('http://alice.localhost:8080/basic-auth-cors/kittens')">Fetch Kittens</button>
+  <button onclick="saveTextareaKittens('http://alice.localhost:8080/basic-auth-cors/kittens')">Save Kittens</button>
+</p>
+<pre></pre>
+</body>
+</html>
