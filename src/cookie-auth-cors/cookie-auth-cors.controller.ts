@@ -1,14 +1,24 @@
-import { Controller, Get, Post, Request, Response } from '@nestjs/common';
+import { Controller, Header, Get, Post, Request, Response, Options } from '@nestjs/common';
 import { readBody } from '../utils/read-body';
 
-@Controller('cookie-auth')
-export class CookieAuthController {
+@Controller('cookie-auth-cors')
+export class CookieAuthCorsController {
   private username = 'admin';
   private password = 'admin';
-  private sessionSecret = 'super-secure-secret';
+  private sessionSecret = 'super-secure-secret-with-cors';
   private kittens: any[] = [];
 
+  @Options('*')
+  @Header('Access-Control-Allow-Origin', 'http://bob.localhost:8080')
+  @Header('Access-Control-Allow-Headers', 'Content-Type')
+  @Header('Access-Control-Allow-Credentials', 'true')
+  public sendCorsHeaders() {
+    return '';
+  }
+
   @Post('login')
+  @Header('Access-Control-Allow-Origin', 'http://bob.localhost:8080')
+  @Header('Access-Control-Allow-Credentials', 'true')
   public async login(@Request() request, @Response() response) {
     const body = await readBody(request);
     const credentials = JSON.parse(body);
@@ -24,6 +34,8 @@ export class CookieAuthController {
   }
 
   @Get('kittens')
+  @Header('Access-Control-Allow-Origin', 'http://bob.localhost:8080')
+  @Header('Access-Control-Allow-Credentials', 'true')
   public getKittens(@Request() request, @Response() response) {
     if (request.cookies['SESSION-SECRET'] !== this.sessionSecret) {
       response.status(401).send('Invalid session secret');
@@ -33,6 +45,8 @@ export class CookieAuthController {
   }
 
   @Post('kittens')
+  @Header('Access-Control-Allow-Origin', 'http://bob.localhost:8080')
+  @Header('Access-Control-Allow-Credentials', 'true')
   public async setKittens(@Request() request, @Response() response) {
     if (request.cookies['SESSION-SECRET'] !== this.sessionSecret) {
       response.status(401).send('Invalid session secret');
@@ -45,6 +59,8 @@ export class CookieAuthController {
   }
 
   @Post('logout')
+  @Header('Access-Control-Allow-Origin', 'http://bob.localhost:8080')
+  @Header('Access-Control-Allow-Credentials', 'true')
   public logout(@Request() request, @Response() response)  {
     if (request.cookies['SESSION-SECRET'] !== this.sessionSecret) {
       response.status(401).send('Invalid session secret');

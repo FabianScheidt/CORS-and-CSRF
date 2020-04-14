@@ -32,14 +32,17 @@
   <section>
     <h3>Authentication</h3>
     <p>
-      <a class="button" href="http://localhost:8080/cookie-auth.html">Cookie Auth</a>
+      <a class="button" href="http://alice.localhost:8080/cookie-auth.html">Cookie Auth</a>
+      <a class="button" href="http://bob.localhost:8080/cookie-auth-cors.html">Cookie Auth CORS</a>
     </p>
   </section>
 
   <section>
     <h3>Cross-Site-Request-Forgery</h3>
     <p>
-      <a class="button" href="http://localhost:4200/cookie-auth.html">No Protection</a>
+      <a class="button" href="http://eve.localhost:8080/cookie-auth.html">No Protection</a>
+      <a class="button" href="http://alice.localhost:8080/cookie-auth-with-csrf-protection.html">With Protection 1</a>
+      <a class="button" href="http://eve.localhost:8080/cookie-auth-with-csrf-protection.html">With Protection 2</a>
     </p>
   </section>
 </div>

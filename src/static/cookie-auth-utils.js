@@ -1,8 +1,9 @@
 /**
  * Sends a login request and logs the result
  */
-function login(url) {
+function login(url, withCredentials) {
   const request = new XMLHttpRequest();
+  request.withCredentials = withCredentials || false;
   request.onreadystatechange = () => {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {
@@ -20,8 +21,9 @@ function login(url) {
 /**
  * Sends a logout request and logs the result
  */
-function logout(url) {
+function logout(url, withCredentials) {
   const request = new XMLHttpRequest();
+  request.withCredentials = withCredentials || false;
   request.onreadystatechange = () => {
     if (request.readyState === XMLHttpRequest.DONE) {
       if (request.status === 200) {

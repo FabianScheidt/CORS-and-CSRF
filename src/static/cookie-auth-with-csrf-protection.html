@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Cookie Auth with CSRF Protection</title>
+  <script type="text/javascript" src="kitten-utils.js"></script>
+  <script type="text/javascript" src="cookie-auth-utils.js"></script>
+  <script>
+    // Change the page heading depending on the origin
+    document.addEventListener('DOMContentLoaded', () => {
+      const h1 = document.getElementsByTagName('h1').item(0);
+      h1.innerText = location.origin === 'http://alice.localhost:8080' ? 'Kitten Manager' : 'Eve the Kitten Thief';
+    });
+
+    // Intercept XHR to add the XSRF header
+    const openXMLHttpRequest = window.XMLHttpRequest.prototype.open;
+    window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+      const res = openXMLHttpRequest.apply(this, arguments);
+      const cookies = (document.cookie || '').split(';').map((c) => c.trim().split('=')).filter((c) => c.length === 2);
+      const xsrfCookie = cookies.find((c) => c[0] === 'XSRF-TOKEN');
+      if (xsrfCookie) {
+        this.setRequestHeader('X-XSRF-TOKEN', xsrfCookie[1]);
+      }
+      return res;
+    }
+  </script>
+</head>
+<body>
+<h1></h1>
+<textarea id="kittens" rows="4" cols="50" placeholder="Enter some Kittens"></textarea>
+<p>
+  <button onclick="login('http://alice.localhost:8080/cookie-auth-with-csrf-protection/login')">Login</button>
+  <button onclick="fetchKittens('http://alice.localhost:8080/cookie-auth-with-csrf-protection/kittens', true)">Fetch Kittens</button>
+  <button onclick="saveTextareaKittens('http://alice.localhost:8080/cookie-auth-with-csrf-protection/kittens', true)">Save Kittens</button>
+  <button onclick="logout('http://alice.localhost:8080/cookie-auth-with-csrf-protection/logout')">Logout</button>
+  <button onclick="logString(document.cookie)">🍪</button>
+</p>
+<pre></pre>
+</body>
+</html>

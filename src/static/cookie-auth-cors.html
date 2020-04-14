@@ -12,7 +12,7 @@
     // Change the page heading depending on the origin
     document.addEventListener('DOMContentLoaded', () => {
       const h1 = document.getElementsByTagName('h1').item(0);
-      h1.innerText = location.origin === 'http://alice.localhost:8080' ? 'Kitten Manager' : 'Eve the Kitten Thief';
+      h1.innerText = location.origin === 'http://alice.localhost:8080' ? 'Kitten Manager' : 'Bob\'s Cross-Kitten Manager';
     });
   </script>
 </head>
@@ -20,10 +20,10 @@
 <h1></h1>
 <textarea id="kittens" rows="4" cols="50" placeholder="Enter some Kittens"></textarea>
 <p>
-  <button onclick="login('http://alice.localhost:8080/cookie-auth/login')">Login</button>
-  <button onclick="fetchKittens('http://alice.localhost:8080/cookie-auth/kittens', true)">Fetch Kittens</button>
-  <button onclick="saveTextareaKittens('http://alice.localhost:8080/cookie-auth/kittens', true)">Save Kittens</button>
-  <button onclick="logout('http://alice.localhost:8080/cookie-auth/logout')">Logout</button>
+  <button onclick="login('http://alice.localhost:8080/cookie-auth-cors/login', true)">Login</button>
+  <button onclick="fetchKittens('http://alice.localhost:8080/cookie-auth-cors/kittens', true)">Fetch Kittens</button>
+  <button onclick="saveTextareaKittens('http://alice.localhost:8080/cookie-auth-cors/kittens', true)">Save Kittens</button>
+  <button onclick="logout('http://alice.localhost:8080/cookie-auth-cors/logout', true)">Logout</button>
   <button onclick="logString(document.cookie)">🍪</button>
 </p>
 <pre></pre>

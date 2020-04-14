@@ -49,6 +49,7 @@ a.button {
   font-family: "Tilde", Arial, sans-serif;
   text-decoration: none;
   padding: 5px 20px;
+  margin-bottom: 5px;
   border-radius: 15px;
 }
 

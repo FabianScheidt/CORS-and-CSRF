@@ -37,15 +37,26 @@ function saveKittens(kittens, url, withCredentials) {
 }
 
 /**
+ * Calls saveKittens with the value of the DOM element with the id "kittens"
+ *
+ * @param url
+ * @param withCredentials
+ */
+function saveTextareaKittens(url, withCredentials) {
+  const kittens = document.getElementById('kittens').value;
+  saveKittens(JSON.parse(kittens), url, withCredentials);
+}
+
+/**
  * Tries to read kitten objects from the provided input and logs them
  *
  * @param kittens
  */
 function processKittens(kittens) {
-  if (kittens) {
+  try {
     logString(JSON.stringify(JSON.parse(kittens), null, 2));
-  } else {
-    logString('Failed to fetch Kittens :(');
+  } catch (e) {
+    logString(kittens || 'Failed to fetch Kittens :(');
   }
 
 }
