@@ -42,22 +42,24 @@ section {
   margin: 30px 0;
 }
 
-a.button {
+.button {
   display: inline-block;
   background-color: #000000;
   color: #ffffff;
   font-family: "Tilde", Arial, sans-serif;
+  font-size: 1em;
   text-decoration: none;
   padding: 5px 20px;
   margin-bottom: 5px;
   border-radius: 15px;
+  outline: none;
 }
 
-a.button:hover {
+.button:hover {
   opacity: 0.85;
 }
 
-a.button:active {
+.button:active {
   opacity: 0.7;
 }
 
