@@ -7,6 +7,7 @@ import { CookieAuthController } from './cookie-auth/cookie-auth.controller';
 import { CookieAuthWithCsrfProtectionController } from './cookie-auth-with-csrf-protection/cookie-auth-with-csrf-protection.controller';
 import { CookieAuthCorsController } from './cookie-auth-cors/cookie-auth-cors.controller';
 import { LoggerMiddleware } from './logger.middleware';
+import { BearerAuthCorsController } from './bearer-auth-cors/bearer-auth-cors.controller';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { LoggerMiddleware } from './logger.middleware';
     CorsWithXhrController,
     CookieAuthController,
     CookieAuthCorsController,
-    CookieAuthWithCsrfProtectionController
+    CookieAuthWithCsrfProtectionController,
+    BearerAuthCorsController
   ],
   providers: [],
 })
