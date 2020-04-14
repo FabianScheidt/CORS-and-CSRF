@@ -14,7 +14,7 @@ export class CookieAuthWithCsrfProtectionController {
     const body = await readBody(request);
     const credentials = JSON.parse(body);
     if (credentials.username === this.username && credentials.password === this.password) {
-      const sessionSecretCookie = 'SESSION-SECRET=' + this.sessionSecret + '; Path=/; Max-Age=300';
+      const sessionSecretCookie = 'SESSION-SECRET=' + this.sessionSecret + '; HttpOnly; Path=/; Max-Age=300';
       const xsrfTokenCookie = 'XSRF-TOKEN=' + this.xsrfToken + '; Path=/; Max-Age=300';
       const headers = {
         'Set-Cookie': [sessionSecretCookie, xsrfTokenCookie]
